@@ -1,0 +1,23 @@
+Package: emrclimputacionesespejo
+Type: Package
+Title: Imputación IR base 2023 
+Version: 0.1.0.9000
+Author: person("Renzo", "Peragallo", , "renzo.peragallo@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Maintainer: Renzo Peragallo Díaz <riperagallod@ine.gob.cl>
+Description: Paquete utilizado para imputar una base de microdatos en el mes T con datos del mes anterior. También permite imputar un año base. 
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    dplyr (>= 1.0.0),
+    tidyr (>= 1.0.0),
+    rlang (>= 1.0.0),
+    purrr (>= 1.0.0)
+RoxygenNote: 7.3.1
+Depends: 
+    R (>= 4.1.0)
+Suggests: 
+    testthat (>= 3.0.0),
+    tibble (>= 1.0.0)
+Config/testthat/edition: 3
