@@ -17,7 +17,7 @@
 #' #df_original es el microdato previo a la imputación y
 #' # ejemplo_parametros son los parámetros definidos para el periodo.
 #' # df_truncado <-
-#'   truncar_valores_imputados(
+#'   aplicar_restricciones(
 #'   microdato_imputado = df_imputado,
 #'   microdato_original = df_original,
 #'   parametros = ejemplo_parametros
