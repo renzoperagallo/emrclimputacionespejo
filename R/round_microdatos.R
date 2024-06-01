@@ -19,11 +19,11 @@ round_microdatos <- function(df,
 
   # Calcular indicadores básicos
 
-  df <- calcular_razones(df = df, razon = roho, dividendo = ro, divisor = ho)
-  df <- calcular_razones(df = df, razon = hont, dividendo = ho, divisor = nt)
-  df <- calcular_razones(df = df, razon = hent, dividendo = he, divisor = nt)
-  df <- calcular_razones(df = df, razon = ognt, dividendo = og, divisor = nt)
-  df <- calcular_razones(df = df, razon = rehe, dividendo = re, divisor = he)
+  df <- round(calcular_razones(df = df, razon = roho, dividendo = ro, divisor = ho), digits = 10)
+  df <- round(calcular_razones(df = df, razon = hont, dividendo = ho, divisor = nt), digits = 10)
+  df <- round(calcular_razones(df = df, razon = hent, dividendo = he, divisor = nt), digits = 10)
+  df <- round(calcular_razones(df = df, razon = ognt, dividendo = og, divisor = nt), digits = 10)
+  df <- round(calcular_razones(df = df, razon = rehe, dividendo = re, divisor = he), digits = 10)
 
   # Redondear indicadores manteniendo las razones.
   df <-
