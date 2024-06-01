@@ -22,8 +22,7 @@ imputar_variables <- function(
     microdato_t1,
     n_cadenas_minimas = 4,
     variables_imputacion
-    ){
-
+){
   # Seleccionar las columnas correspondientes -------------------------------
 
   microdato_t <- microdato_t |> dplyr::select(rol, ano, mes, categoria, tamano, grupo, sexo, nt, ho, he, ro, re, og)
@@ -104,46 +103,54 @@ imputar_variables <- function(
       variables_imputacion =  variables_imputacion
     )
 
-  # Cálculo parámetros derivados (HO, HE, RE, HT,  RO y OG)-----------------
-
-  #### Transformar a formato ancho ####
-  base_calculo <-
-    microdato_imputado_mes_t |>
-    tidyr::pivot_wider(
-      names_from = variable,
-      values_from = valor
+  # Imputar por arrastre
+  microdato_imputado_mes_t <-
+    imputar_parametros_arrastre(
+      microdato_largo_mes_t = microdato_imputado_mes_t,
+      microdato_largo_mes_t1 = microdato_t1_largo,
+      variables_imputacion = variables_imputacion
     )
 
-  #### Calcular parámetros derivados ####
+      # Cálculo parámetros derivados (HO, HE, RE, HT,  RO y OG)-----------------
 
-  if ("hont" %in% variables_imputacion){
-    base_calculo <-
-      base_calculo |>
-      dplyr::mutate(
-        ho = as.double(hont * nt)
-      )
-  }
-  if ("roho" %in% variables_imputacion){
-    base_calculo <-
-      base_calculo |>
-      dplyr::mutate(
-        ro = as.double(roho * ho)
-      )
-  }
-  if ("ognt" %in% variables_imputacion){
-    base_calculo <-
-      base_calculo |>
-      dplyr::mutate(
-        og = as.double(ognt * nt)
-      )
-  }
+      #### Transformar a formato ancho ####
+      base_calculo <-
+        microdato_imputado_mes_t |>
+        tidyr::pivot_wider(
+          names_from = variable,
+          values_from = valor
+        )
 
-  # Return ------------------------------------------------------------------
+      #### Calcular parámetros derivados ####
 
-  # Seleccionar columnas requeridas
-  base_calculo <-
-    base_calculo |>
-    dplyr::select(ano, mes, rol, tamano, categoria, sexo, grupo, nt, ro, re, ho, he, og)
+      if ("hont" %in% variables_imputacion){
+        base_calculo <-
+          base_calculo |>
+          dplyr::mutate(
+            ho = as.double(hont * nt)
+          )
+      }
+      if ("roho" %in% variables_imputacion){
+        base_calculo <-
+          base_calculo |>
+          dplyr::mutate(
+            ro = as.double(roho * ho)
+          )
+      }
+      if ("ognt" %in% variables_imputacion){
+        base_calculo <-
+          base_calculo |>
+          dplyr::mutate(
+            og = as.double(ognt * nt)
+          )
+      }
 
-  return(base_calculo)
-}
+      # Return ------------------------------------------------------------------
+
+      # Seleccionar columnas requeridas
+      base_calculo <-
+        base_calculo |>
+        dplyr::select(ano, mes, rol, tamano, categoria, sexo, grupo, nt, ro, re, ho, he, og)
+
+      return(base_calculo)
+    }
