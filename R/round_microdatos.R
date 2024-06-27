@@ -24,6 +24,7 @@ round_microdatos <- function(df,
   df <- calcular_razones(df = df, razon = hent, dividendo = he, divisor = nt)
   df <- calcular_razones(df = df, razon = ognt, dividendo = og, divisor = nt)
   df <- calcular_razones(df = df, razon = rehe, dividendo = re, divisor = he)
+  df <- df |> dplyr::mutate(dplyr::across(dplyr::all_of(c("roho", "hont", "hent", "ognt","rehe")), ~round(., digits = 10)))
 
   # Redondear indicadores manteniendo las razones.
   df <-
